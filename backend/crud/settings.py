@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'Users',
     'api'
 ]
 
@@ -81,6 +82,8 @@ DATABASES = {
     }
 }
 
+# User Model Custom
+AUTH_USER_MODEL = 'Users.CustomUser'
 
 
 # Password validation
