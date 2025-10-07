@@ -85,44 +85,66 @@ const HomePage = () => {
             </Typography>
           </Grid>
         {/* Image Carousel with custom navigation */}
-        <Grid item xs={12} style={{ position: "relative" }}> {/* Add position relative */}
-          <Swiper 
-            ref={swiperRef}
-            spaceBetween={30} 
-            slidesPerView={1} 
-            autoplay={{ delay: 1000 }}
-          >
-            {images.map((img, index) => (
-              <SwiperSlide key={index}>
-                <img 
-                  src={img} 
-                  alt={`Slide ${index}`} 
-                  style={{ width: "100%", height: "300px", objectFit: "cover" }} 
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+{/* Image Carousel with custom navigation */}
+<Grid item xs={12} style={{ position: "relative" }}>
+  <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center"
+    position="relative"
+    width="100%"
+  >
+    <Swiper 
+  ref={swiperRef}
+  spaceBetween={30} 
+  slidesPerView={1} 
+  autoplay={{ delay: 2000 }}
+  style={{ width: "100%", height: "auto" }} // 🔑 let Swiper be auto-height
+>
+  {images.map((img, index) => (
+    <SwiperSlide 
+      key={index}
+      style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "auto" }} // 🔑 shrink-wrap slide
+    >
+      <img 
+        src={img} 
+        alt={`Slide ${index}`} 
+        style={{ 
+          maxWidth: "100%", 
+          height: "auto", 
+          maxHeight: "80vh", 
+          objectFit: "contain", 
+          display: "block",
+          margin: "0 auto"
+        }} 
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
 
-          {/* Custom Navigation Buttons */}
-          <Box 
-            marginLeft={"20px"}
-            display="flex" 
-            justifyContent="space-between" 
-            alignItems="center" 
-            position="absolute" 
-            top="50%" 
-            left="0" 
-            right="0" 
-            zIndex="10"
-          >
-            <Button onClick={handleBack} style={{ backgroundColor: "#ffffff", borderRadius: "50%" }}>
-              <ArrowBackIos />
-            </Button>
-            <Button onClick={handleNext} style={{ backgroundColor: "#ffffff", borderRadius: "50%" }}>
-              <ArrowForwardIos />
-            </Button>
-          </Box>
-        </Grid>
+    {/* Custom Navigation Buttons inside the same Box so they follow image height */}
+    <Box 
+      display="flex" 
+      justifyContent="space-between" 
+      alignItems="center" 
+      position="absolute"
+      top="50%" 
+      left="0" 
+      right="0" 
+      transform="translateY(-50%)"
+      px={2}
+      zIndex={10}
+    >
+      <Button onClick={handleBack} style={{ backgroundColor: "#fff", borderRadius: "50%" }}>
+        <ArrowBackIos />
+      </Button>
+      <Button onClick={handleNext} style={{ backgroundColor: "#fff", borderRadius: "50%" }}>
+        <ArrowForwardIos />
+      </Button>
+    </Box>
+  </Box>
+</Grid>
+
         
         {/* Sections with different BG colors */}
         {sections.map((section, index) => (
